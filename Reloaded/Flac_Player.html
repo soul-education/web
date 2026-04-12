@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto&display=swap" rel="stylesheet">
+<title>Flac Player</title>
+<style>
+  body {
+    margin: 0;
+    text-align: center;            
+    font-family: 'Roboto', Verdana, Geneva, sans-serif; 
+    color: #fff;
+    overflow-x: hidden;
+    background-color: #2a1b5c;
+    padding-left: 80px;
+    padding-right: 80px;
+    line-height: 1.6;
+    font-size: 1.1em;
+    max-width: 1000px;
+    margin: auto;
+  }	
+ 
+/* Subtítulos con efecto neón */
+h2, h3 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900; 
+    font-size: 2em;   
+    color: #ff00aa;   
+    -webkit-text-stroke: 2px #2a1b5c; 
+    text-shadow: 
+        0 0 10px #ff00aa,
+        0 0 20px #ff00aa,
+        0 0 40px #ff00aa;
+    margin-top: 40px;
+    text-transform: uppercase; 
+    letter-spacing: 2px;       
+}
+	
+h1.flac-player-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 4em;
+  text-align: center;
+  letter-spacing: 4px;
+
+  /* Gradiente animado */
+  background: linear-gradient(270deg, #ff00aa, #00ffe0, #ffff00, #ff6600);
+  background-size: 800% 800%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* estándar */
+  color: transparent;
+
+  animation: gradientFlow 10s ease infinite, neonPulse 2s infinite alternate;
+}
+
+/* Animación del gradiente */
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Efecto de neón pulsante */
+@keyframes neonPulse {
+  from {
+    text-shadow: 0 0 10px #ff00aa, 0 0 20px #ff00aa, 0 0 40px #ff00aa;
+    transform: scale(1);
+  }
+  to {
+    text-shadow: 0 0 20px #00ffe0, 0 0 40px #00ffe0, 0 0 80px #00ffe0;
+    transform: scale(1.05);
+  }
+}  
+  .imagen {
+    display: inline-block;
+    margin: 20px;
+    padding: 10px;
+    border: 3px solid #ff00aa;
+    border-radius: 8px;
+    transform: scale(1.1);
+    box-shadow: 0 0 25px #ff00aa;
+  }
+  .imagen img {
+    max-width: 500px;
+    display: block;
+  }
+  ul {
+    text-align: left;   /* fuerza alineación a la izquierda */
+    margin-left: 20px;  /* agrega margen para que no quede pegado */
+  }
+  li {
+    margin-bottom: 8px; /* espacio entre ítems */
+  }
+</style>
+</head>
+<body>
+
+<h1 class="flac-player-title">Flac Player</h1>
+
+
+<!-- Imagen ZIP con descarga -->
+<div class="imagen" style="width:200px; text-align:center;">
+  <a href="Flac_Player/Flac_Player.zip" download>
+    <img src="Flac_Player/zip.png" alt="Archivo ZIP Flac Player" style="width:100%; height:auto;">
+    <p style="text-align:center; color:#ff00aa; font-weight:bold; margin-top:10px; text-shadow:0 0 10px #ff00aa;">
+    DESCARGAR
+  </p>
+  </a>
+</div>
+
+
+
+<p>Les presento un script Bash para Linux, creado con ayuda de la IA, que facilita la organización y reproducción de tu colección de discos en formato <strong>FLAC</strong>.</p>
+
+<p>El script recorre la estructura de tus directorios, detecta los álbumes y los muestra de forma ordenada. Al hacer clic en la portada de cada disco, se abre automáticamente en <strong>Audacious</strong> (clon de Winamp) o en <strong>VLC</strong>. Además, es fácilmente adaptable a otros reproductores.</p>
+
+<div class="imagen">
+  <img src="Flac_Player/directorios.png" alt="Estructura de directorios">
+</div>
+
+<h2>Requisitos de cada directorio</h2>
+<ul>
+  <li>Archivos de audio en formato <strong>.flac</strong>.</li>
+  <li>Una playlist de VLC llamada <strong>disco.m3u</strong> (el script convierte la playlist a formato Audacious).</li>
+  <li>Una carátula llamada <strong>caratula.jpg</strong>.</li>
+</ul>
+
+<div class="imagen">
+  <img src="Flac_Player/directorio.png" alt="Contenido del directorio">
+</div>
+
+<h2>Ejecución</h2>
+<p>Podés correrlo desde la terminal o crear un acceso directo. Aquí un ejemplo de cómo hacerlo al acceso directo:</p>
+
+<div class="imagen">
+  <img src="Flac_Player/shortcut.png" alt="Acceso directo">
+</div>
+
+<h2>Interfaz generada</h2>
+<p>Si los datos están cargados correctamente, se abrirá una ventana con todos los discos disponibles:</p>
+
+<div class="imagen">
+  <img src="Flac_Player/app.png" alt="Ventana de aplicación">
+</div>
+
+<p>Al hacer clic en la portada de cada álbum, se abrirá Audacious para reproducirlo. Al cerrar Audacious, la ventana se recargará mostrando nuevamente todos los discos.</p>
+
+<p>Para darle un toque divertido, también se abre una ventana con un GIF del <strong>Buffalo Man</strong> bailando:</p>
+
+<div class="imagen">
+  <img src="Flac_Player/buffalo_dance.gif" alt="Buffalo Man bailando">
+</div>
+
+<h2>Licencia</h2>
+<p>Este proyecto no ofrece garantías. Podés modificarlo, usarlo como base para tu propio desarrollo, distribuirlo y disfrutarlo.</p>
+
+<h2>Motivación</h2>
+<p>Aunque suelo escuchar música en plataformas de streaming, las versiones remasterizadas de los primeros álbumes de Jamiroquai no me convencen: pierden samples por derechos de autor y gran parte de su magia. Por eso ripié con <strong>Exact Audio Copy (EAC)</strong> toda la discografía y algunos maxis, y desarrollé este script para facilitar su reproducción y mantener la esencia original.</p>
+
+</body>
+</html>

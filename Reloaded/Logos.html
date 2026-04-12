@@ -1,0 +1,140 @@
+<html>
+<head>
+<title>Logos y Buffalo Man de Jamiroquai</title>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto&display=swap" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    text-align: center;            
+    font-family: 'Roboto', Verdana, Geneva, sans-serif; 
+    color: #fff;
+    overflow-x: hidden;
+    background-color: #2a1b5c;
+    padding-left: 80px;
+    padding-right: 80px;
+    line-height: 1.6;
+    font-size: 1.1em;
+    max-width: 1000px;
+    margin: auto;
+  }	
+ 
+/* Subtítulos con efecto neón */
+h2, h3 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900; 
+    font-size: 2em;   
+    color: #ff00aa;   
+    -webkit-text-stroke: 2px #2a1b5c; 
+    text-shadow: 
+        0 0 10px #ff00aa,
+        0 0 20px #ff00aa,
+        0 0 40px #ff00aa;
+    margin-top: 40px;
+    text-transform: uppercase; 
+    letter-spacing: 2px;       
+}
+
+.logo-box {
+  background-color: white;       /* fondo blanco */
+  border: 3px solid fuchsia;     /* borde fucsia */
+  box-shadow: 0 0 10px fuchsia;  /* efecto neón */
+  padding: 10px;
+  margin: 20px auto;             /* centra cada cuadro */
+  width: 550px;                  /* ancho fijo */
+  text-align: center;            /* centra texto dentro del cuadro */
+  display: block;
+}
+.logo-box img {
+  max-width: 40	0px;
+  display: block;
+  margin: 0 auto 10px auto;      /* centra la imagen */
+}
+
+.logo-box p {
+  font-size: 14px;
+  color: black;
+  margin: 0;
+}
+
+
+h1.logos-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 4em;
+  text-align: center;
+  letter-spacing: 4px;
+
+  /* Gradiente animado */
+  background: linear-gradient(270deg, #ff00aa, #00ffe0, #ffff00, #ff6600);
+  background-size: 800% 800%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* estándar */
+  color: transparent;
+
+  animation: gradientFlow 10s ease infinite, neonPulse 2s infinite alternate;
+}
+
+/* Animación del gradiente */
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Efecto de neón pulsante */
+@keyframes neonPulse {
+  from {
+    text-shadow: 0 0 10px #ff00aa, 0 0 20px #ff00aa, 0 0 40px #ff00aa;
+    transform: scale(1);
+  }
+  to {
+    text-shadow: 0 0 20px #00ffe0, 0 0 40px #00ffe0, 0 0 80px #00ffe0;
+    transform: scale(1.05);
+  }
+}
+
+</style>
+</head>
+<body>
+<h1 class="logos-title">Logos y Buffalo Man</h1>
+
+<h2>Logos</h2>
+<div class="logo-box">
+  <img src="https://soul-education.github.io/web/Sub/Info/WHENYOUGONNALEARNJAMI.GIF" alt="Logo When You Gonna Learn">
+  <p><strong>Primer logo:</strong> Usado en <em>When You Gonna Learn</em> (1992).</p>
+</div>
+
+<div class="logo-box">
+  <img src="https://soul-education.github.io/web/Sub/Info/NORMALTEXT.GIF" alt="Logo estándar">
+  <p><strong>Logo estándar:</strong> El más reconocido, aparece en la mayoría de los álbumes.</p>
+</div>
+
+<div class="logo-box">
+  <img src="https://soul-education.github.io/web/Sub/Info/FERRARITEXT.GIF" alt="Logo Ferrari">
+  <p><strong>Logo Ferrari:</strong> Inspirado en Ferrari, visto en <em>Virtual Insanity</em> (1996).</p>
+</div>
+
+<div class="logo-box">
+  <img src="https://soul-education.github.io/web/Sub/Info/COSMICTEXT.GIF" alt="Logo Cosmic Girl">
+  <p><strong>Logo Cosmic Girl:</strong> Creado para el sencillo <em>Cosmic Girl</em> (1996).</p>
+</div>
+
+<h2>Buffalo Man</h2>
+<div class="logo-box">
+  <img src="https://soul-education.github.io/web/Sub/Info/BUFFALO.JPG" alt="Buffalo Man clásico">
+  <p><strong>Buffalo Man clásico:</strong> La silueta más icónica de Jamiroquai.</p>
+</div>
+
+<div class="logo-box">
+  <img src="https://soul-education.github.io/web/Sub/Info/FERRARILOGO.GIF" alt="Buffalo Man Ferrari">
+  <p><strong>Buffalo Man Ferrari:</strong> Usado en <em>Travelling Without Moving</em> (1996).</p>
+</div>
+
+<div class="logo-box">
+  <img src="https://soul-education.github.io/web/Sub/Info/COSMICLOGO.GIF" alt="Buffalo Man Cosmic Girl">
+  <p><strong>Buffalo Man Cosmic Girl:</strong> Diseñado para <em>Cosmic Girl</em> (1996).</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+@font-face {
+  font-family: 'Adventure';
+  src: url('Adventure.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'NeverSayDie';
+  src: url('NEVERSAYDIE.ttf') format('truetype');
+}
+
+body { margin:0; background:#000; color:white; }
+
+/* Barra de navegación */
+nav {
+  background:#000;
+  padding:10px 0px 0px 0px;
+  position:relative;
+  z-index:1000;
+}
+.nav-container {
+  max-width:1600px;
+  margin:auto;
+  display:flex;
+  justify-content:space-around;
+}
+
+/* Contenedor dropdown */
+.dropdown { position:relative; }
+
+/* Links principales */
+.dropdown > a {
+  position:relative;
+  font-family:'Adventure', sans-serif;
+  text-decoration:none;
+  color:#54FF00;
+  padding:5px 10px;
+  transition:color 0.3s ease, border 0.3s ease;
+  font-size:18px; /* tamaño de fuente aumentado */
+}
+
+/* Línea bajo opción principal */
+.dropdown > a::after {
+  content:"";
+  position:absolute;
+  bottom:-4px; left:50%;
+  width:0; height:2px;
+  background:limegreen;
+  transition:all 0.3s ease;
+  transform:translateX(-50%);
+}
+.dropdown > a:hover { color:white; }
+.dropdown > a:hover::after { width:100%; background:white; }
+
+/* Submenús ocultos */
+.dropdown-content {
+  display:none;
+  position:absolute;
+  top:calc(100% + 6px); /* baja unos píxeles para no tapar el borde */
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,0.7); /* transparencia en el fondo */
+  min-width:120px;
+  text-align:center;
+  padding-top:8px;
+  z-index:2000;
+  border-radius:4px;
+  font-size:18px; /* tamaño de fuente aumentado */
+}
+
+/* Mostrar submenús al hover */
+.dropdown:hover .dropdown-content { display:block; }
+
+/* Links de subopciones */
+.dropdown-content a {
+  display:block;
+  padding:6px 10px;
+  font-family:'Adventure', sans-serif;
+  text-decoration:none;
+  color:#54FF00;
+  margin-top:5px;
+  transition:color 0.3s ease;
+}
+.dropdown-content a::after {
+  content:"";
+  display:block;
+  width:0; height:2px;
+  background:limegreen;
+  margin:auto;
+  transition:width 0.3s ease;
+}
+.dropdown-content a:hover { color:white; }
+.dropdown-content a:hover::after { width:100%; }
+
+/* Principal se convierte en cuadrado cuando el dropdown está activo */
+.dropdown:hover > a {
+  border:1px solid #54FF00;
+}
+
+/* Header */
+header {
+  background:linear-gradient(to right,
+    black 0%, fuchsia 7%, violet 14%, blue 21%, turquoise 28%, green 35%, yellow 42%,
+    black 50%, yellow 58%, green 65%, turquoise 72%, blue 79%, violet 86%, fuchsia 93%, black 100%);
+  padding:0 0 95px 0;
+  position:relative;
+}
+header::after {
+  content:"";
+  position:absolute;
+  bottom:0; left:0;
+  width:100%; height:100px;
+  background:#000;
+  clip-path:ellipse(85% 100% at 50% 100%);
+}
+.header-container { max-width:1600px; margin:auto; }
+.center-row {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 60px;
+  margin-top:-10px;
+}
+
+/* Souleducation */
+#souleducation {
+  font-family:'NeverSayDie', cursive;
+  font-size:50px; font-weight:bold; margin:0; line-height:1;
+  text-shadow:0 0 15px #fff;
+  -webkit-text-stroke: 0.5px #F3F3F3;
+  letter-spacing: 1px;
+  transition: transform 1s ease, text-shadow 1s ease, filter 0.5s ease; /* transición también para filter */
+}
+
+#souleducation:hover {
+  transform:scale(1.3);
+  text-shadow:0 0 25px #fff;
+  color: #E7E7E7;
+  -webkit-text-stroke: 0.5px #BBBBBB;
+}
+
+/* Buffalos */
+.buffalo-group { display:flex; align-items:flex-end; gap:10px; margin-bottom:0; }
+svg.buffalo { overflow:visible; transition:transform 0.3s ease; }
+svg.buffalo:hover { filter:brightness(0.92); }
+.big { width:80px; height:80px; }
+.medium { width:65px; height:65px; }
+.small { width:50px; height:50px; }
+.buffalo-green path { fill:url(#grad-green); filter:url(#blur-green); }
+.buffalo-red path { fill:url(#grad-red); filter:url(#blur-red); }
+.buffalo-silver path { fill:url(#grad-silver); filter:url(#blur-silver); }
+
+/*Pagina central y fondo */
+
+.iframe-overlay {
+  position: relative;
+  margin-top: -80px; /* pisa el after del header */
+  display: flex;
+  justify-content: center;
+  background-image: url('buffaloman_tile.png');
+  background-repeat: repeat;
+  background-size: 256px 384px;
+  background-color: black;
+  padding: 0px 0;
+  z-index: 500; /* suficiente para estar sobre el after */
+}
+
+.iframe-overlay iframe {
+  width: 1600px; /* igual al ancho de la botonera */
+  height: 800px;
+  border: none;
+  background: rgba(0,0,0,0.7);
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}

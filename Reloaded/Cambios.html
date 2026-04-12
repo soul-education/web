@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+<title>Souleducation Reloaded</title>
+<style>
+  body {
+    margin: 0;
+    text-align: center;            
+    font-family: 'Roboto', Verdana, Geneva, sans-serif; 
+    color: #fff;
+    overflow-x: hidden;
+    background-color: #2a1b5c;
+    padding-left: 80px;
+    padding-right: 80px;
+    line-height: 1.6;
+    font-size: 1.1em;
+    max-width: 1000px;
+    margin: auto;
+  }	
+ 
+/* Subtítulos con efecto neón */
+h2, h3 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900; 
+    font-size: 2em;   
+    color: #ff00aa;   
+    -webkit-text-stroke: 2px #2a1b5c; 
+    text-shadow: 
+        0 0 10px #ff00aa,
+        0 0 20px #ff00aa,
+        0 0 40px #ff00aa;
+    margin-top: 40px;
+    text-transform: uppercase; 
+    letter-spacing: 2px;       
+}
+	
+h1.lapagina-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 4em;
+  text-align: center;
+  letter-spacing: 4px;
+
+  /* Gradiente animado */
+  background: linear-gradient(270deg, #ff00aa, #00ffe0, #ffff00, #ff6600);
+  background-size: 800% 800%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* estándar */
+  color: transparent;
+
+  animation: gradientFlow 10s ease infinite, neonPulse 2s infinite alternate;
+}
+
+/* Animación del gradiente */
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Efecto de neón pulsante */
+@keyframes neonPulse {
+  from {
+    text-shadow: 0 0 10px #ff00aa, 0 0 20px #ff00aa, 0 0 40px #ff00aa;
+    transform: scale(1);
+  }
+  to {
+    text-shadow: 0 0 20px #00ffe0, 0 0 40px #00ffe0, 0 0 80px #00ffe0;
+    transform: scale(1.05);
+  }
+}  
+</style>
+</head>
+<body>
+
+<h1 class="lapagina-title">Historial de cambios</h1>
+
+<div style="background-color:#000; color:#39ff14; font-family:'Ubuntu Mono', monospace; padding:20px; text-align:left;">
+<pre style="font-size:14px; line-height:1.4;">
+***********************************************************************
+*                                                                     *
+*   FECHA:   2026-04-12                                               *
+*   CAMBIOS: VERSION INICIAL                                          *
+*                                                                     *
+***********************************************************************
+</pre>
+</div>
+
+</body>
+</html>

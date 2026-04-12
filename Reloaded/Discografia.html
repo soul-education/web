@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto&display=swap" rel="stylesheet">
+  <title>Discografía Jamiroquai</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+    background-color: #2a1b5c;
+  }
+
+  h1 {
+    text-align: center;
+    padding: 20px;
+    font-size: 2.5em;
+    letter-spacing: 2px;
+  }
+
+  /* Scrollbar falso arriba */
+  .scrollbar-fake {
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 12px;
+    background: rgba(255,255,255,0.05);
+  }
+  .scroll-content {
+    height: 1px;
+  }
+  .scrollbar-fake::-webkit-scrollbar {
+    height: 12px;
+  }
+  .scrollbar-fake::-webkit-scrollbar-thumb {
+    background: #ff00aa;
+    border-radius: 6px;
+    box-shadow: 0 0 10px #ff00aa;
+  }
+  .scrollbar-fake::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.1);
+  }
+
+  /* Timeline real */
+  .timeline {
+    display: flex;
+    overflow-x: hidden; /* ocultamos la barra real */
+    scroll-behavior: smooth;
+    gap: 40px;
+    padding: 40px;
+    width: 100%; 
+    background: none;
+  }
+
+  .album {
+    flex: 0 0 auto;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    cursor: pointer;
+    border-radius: 12px;
+    background-color: transparent;
+    padding: 15px;
+    position: relative;
+    border: 1px solid rgba(255,0,170,0.4);
+    box-shadow: 0 0 15px rgba(255,0,170,0.4);
+  }
+
+  .album:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px #ff00aa;
+  }
+
+  .album img {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .album h2 {
+    margin: 10px 0 5px;
+    font-size: 1.2em;
+  }
+
+  .album p {
+    font-size: 0.9em;
+    opacity: 0.8;
+  }
+
+  .tracks {
+    display: none;
+    margin-top: 10px;
+    text-align: left;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .album:hover .tracks {
+    display: block;
+  }
+
+  .tracks li {
+    list-style: none;
+    margin: 5px 0;
+    padding: 5px;
+    background-color: transparent;
+    border: 1px solid rgba(255,0,170,0.3);
+    border-radius: 6px;
+    transition: border 0.3s ease;
+    cursor: pointer;
+  }
+
+  .tracks li:hover {
+    border: 1px solid #ff00aa;
+  }
+
+  /* Modal */
+  .modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(20,0,30,0.95);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .modal.show {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .modal-content {
+    margin: 5% auto;
+    padding: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    width: 80%;
+    max-width: 800px;
+    color: #fff;
+    line-height: 1.6;
+    font-size: 1em;
+    box-shadow: 0 0 20px #ff00aa;
+    overflow-y: auto;
+    max-height: 80vh;
+    font-family: 'Roboto', Verdana, Geneva, sans-serif;
+  }
+
+  .close {
+    color: #fff;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .close:hover {
+    color: #ff00aa;
+  }
+
+  #songTitle {
+    margin-top: 0;
+    font-size: 1.6em;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  #songLyrics {
+    margin-top: 20px;
+    white-space: pre-wrap;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+  h1.discografia-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 4em;
+  text-align: center;
+  letter-spacing: 4px;
+
+  /* Gradiente animado */
+  background: linear-gradient(270deg, #ff00aa, #00ffe0, #ffff00, #ff6600);
+  background-size: 800% 800%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* estándar */
+  color: transparent;
+
+  animation: gradientFlow 10s ease infinite, neonPulse 2s infinite alternate;
+}
+
+/* Animación del gradiente */
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Efecto de neón pulsante */
+@keyframes neonPulse {
+  from {
+    text-shadow: 0 0 10px #ff00aa, 0 0 20px #ff00aa, 0 0 40px #ff00aa;
+    transform: scale(1);
+  }
+  to {
+    text-shadow: 0 0 20px #00ffe0, 0 0 40px #00ffe0, 0 0 80px #00ffe0;
+    transform: scale(1.05);
+  }
+}  
+</style>
+
+</head>
+<body>
+  <h1 class="discografia-title">Discografía Jamiroquai</h1>
+
+  <!-- Scrollbar falso arriba -->
+  <div class="scrollbar-fake" onscroll="syncScroll(this)">
+    <div class="scroll-content"></div>
+  </div>
+
+  <!-- Timeline real -->
+  <div class="timeline" id="timeline">
+    <!-- Emergency On Planet Earth -->
+    <div class="album">
+      <img src="caratulas/1_Emergency_on_Planet_Earth.jpg" alt="Emergency On Planet Earth">
+      <h2>Emergency On Planet Earth</h2>
+      <p>1993</p>
+      <ul class="tracks">
+<li onclick="openLyrics('When You Gonna Learn','letras/When_You_Gonna_Learn.html')">When You Gonna Learn</li>
+<li onclick="openLyrics('Too Young To Die','letras/Too_Young_To_Die.html')">Too Young To Die</li>
+<li onclick="openLyrics('Hooked Up','letras/Hooked_Up.html')">Hooked Up</li>
+<li onclick="openLyrics('If I Like It, I Do It','letras/If_I_Like_It_I_Do_It.html')">If I Like It, I Do It</li>
+<li onclick="openLyrics('Music of the Mind','letras/Music_of_the_Mind.html')">Music of the Mind</li>
+<li onclick="openLyrics('Emergency on Planet Earth','letras/Emergency_on_Planet_Earth.html')">Emergency on Planet Earth</li>
+<li onclick="openLyrics('Whatever It Is, I Just Can’t Stop','letras/Whatever_It_Is_I_Just_Cant_Stop.html')">Whatever It Is, I Just Can’t Stop</li>
+<li onclick="openLyrics('Blow Your Mind','letras/Blow_Your_Mind.html')">Blow Your Mind</li>
+<li onclick="openLyrics('Revolution 1993','letras/Revolution_1993.html')">Revolution 1993</li>
+<li onclick="openLyrics('Didgin’ Out','letras/Didgin_Out.html')">Didgin’ Out</li>
+
+      </ul>
+    </div>
+
+    <!-- The Return of the Space Cowboy -->
+    <div class="album">
+      <img src="caratulas/2_The_Return_of_the_Space_Cowboy.jpg" alt="The Return of the Space Cowboy">
+      <h2>The Return of the Space Cowboy</h2>
+      <p>1994</p>
+      <ul class="tracks">
+<li onclick="openLyrics('Just Another Story','letras/Just_Another_Story.html')">Just Another Story</li>
+<li onclick="openLyrics('Stillness in Time','letras/Stillness_in_Time.html')">Stillness in Time</li>
+<li onclick="openLyrics('Half the Man','letras/Half_the_Man.html')">Half the Man</li>
+<li onclick="openLyrics('Light Years','letras/Light_Years.html')">Light Years</li>
+<li onclick="openLyrics('Manifest Destiny','letras/Manifest_Destiny.html')">Manifest Destiny</li>
+<li onclick="openLyrics('The Kids','letras/The_Kids.html')">The Kids</li>
+<li onclick="openLyrics('Mr. Moon','letras/Mr_Moon.html')">Mr. Moon</li>
+<li onclick="openLyrics('Scam','letras/Scam.html')">Scam</li>
+<li onclick="openLyrics('Journey to Arnhemland','letras/Journey_to_Arnhemland.html')">Journey to Arnhemland</li>
+<li onclick="openLyrics('Morning Glory','letras/Morning_Glory.html')">Morning Glory</li>
+<li onclick="openLyrics('Space Cowboy','letras/Space_Cowboy.html')">Space Cowboy</li>
+
+      </ul>
+    </div>
+
+    <!-- Travelling Without Moving -->
+    <div class="album">
+      <img src="caratulas/3_Travelling_Without_Moving.jpg" alt="Travelling Without Moving">
+      <h2>Travelling Without Moving</h2>
+      <p>1996</p>
+      <ul class="tracks">
+<li onclick="openLyrics('Virtual Insanity','letras/Virtual_Insanity.html')">Virtual Insanity</li>
+<li onclick="openLyrics('Cosmic Girl','letras/Cosmic_Girl.html')">Cosmic Girl</li>
+<li onclick="openLyrics('Use the Force','letras/Use_the_Force.html')">Use the Force</li>
+<li onclick="openLyrics('Everyday','letras/Everyday.html')">Everyday</li>
+<li onclick="openLyrics('Alright','letras/Alright.html')">Alright</li>
+<li onclick="openLyrics('High Times','letras/High_Times.html')">High Times</li>
+<li onclick="openLyrics('Drifting Along','letras/Drifting_Along.html')">Drifting Along</li>
+<li onclick="openLyrics('Didjerama','letras/Didjerama.html')">Didjerama</li>
+<li onclick="openLyrics('Didjital Vibrations','letras/Didjital_Vibrations.html')">Didjital Vibrations</li>
+<li onclick="openLyrics('Travelling Without Moving','letras/Travelling_Without_Moving.html')">Travelling Without Moving</li>
+<li onclick="openLyrics('You Are My Love','letras/You_Are_My_Love.html')">You Are My Love</li>
+<li onclick="openLyrics('Spend a Lifetime','letras/Spend_a_Lifetime.html')">Spend a Lifetime</li>
+<li onclick="openLyrics('Do U Know Where You’re Coming From','letras/Do_U_Know_Where_Youre_Coming_From.html')">Do U Know Where You’re Coming From</li>
+<li onclick="openLyrics('Funktion','letras/Funktion.html')">Funktion</li>
+
+      </ul>
+    </div>
+
+    <!-- Synkronized -->
+    <div class="album">
+      <img src="caratulas/4_Synkronized.jpg" alt="Synkronized">
+      <h2>Synkronized</h2>
+      <p>1999</p>
+      <ul class="tracks">
+<li onclick="openLyrics('Canned Heat','letras/Canned_Heat.html')">Canned Heat</li>
+<li onclick="openLyrics('Planet Home','letras/Planet_Home.html')">Planet Home</li>
+<li onclick="openLyrics('Black Capricorn Day','letras/Black_Capricorn_Day.html')">Black Capricorn Day</li>
+<li onclick="openLyrics('Soul Education','letras/Soul_Education.html')">Soul Education</li>
+<li onclick="openLyrics('Falling','letras/Falling.html')">Falling</li>
+<li onclick="openLyrics('Destitute Illusions','letras/Destitute_Illusions.html')">Destitute Illusions</li>
+<li onclick="openLyrics('Supersonic','letras/Supersonic.html')">Supersonic</li>
+<li onclick="openLyrics('Butterfly','letras/Butterfly.html')">Butterfly</li>
+<li onclick="openLyrics('Where Do We Go From Here?','letras/Where_Do_We_Go_From_Here.html')">Where Do We Go From Here?</li>
+<li onclick="openLyrics('King for a Day','letras/King_for_a_Day.html')">King for a Day</li>
+<li onclick="openLyrics('Deeper Underground','letras/Deeper_Underground.html')">Deeper Underground</li>
+
+      </ul>
+    </div>
+
+    <!-- A Funk Odyssey -->
+    <div class="album">
+      <img src="caratulas/5_A_Funk_Odyssey.jpg" alt="A Funk Odyssey">
+      <h2>A Funk Odyssey</h2>
+      <p>2001</p>
+      <ul class="tracks">
+<li onclick="openLyrics('Feel So Good','letras/Feel_So_Good.html')">Feel So Good</li>
+<li onclick="openLyrics('Little L','letras/Little_L.html')">Little L</li>
+<li onclick="openLyrics('You Give Me Something','letras/You_Give_Me_Something.html')">You Give Me Something</li>
+<li onclick="openLyrics('Corner of the Earth','letras/Corner_of_the_Earth.html')">Corner of the Earth</li>
+<li onclick="openLyrics('Love Foolosophy','letras/Love_Foolosophy.html')">Love Foolosophy</li>
+<li onclick="openLyrics('Stop Don’t Panic','letras/Stop_Dont_Panic.html')">Stop Don’t Panic</li>
+<li onclick="openLyrics('Black Crow','letras/Black_Crow.html')">Black Crow</li>
+<li onclick="openLyrics('Main Vein','letras/Main_Vein.html')">Main Vein</li>
+<li onclick="openLyrics('Twenty Zero One','letras/Twenty_Zero_One.html')">Twenty Zero One</li>
+<li onclick="openLyrics('Picture of My Life','letras/Picture_of_My_Life.html')">Picture of My Life</li>
+<li onclick="openLyrics('So Good to Feel Real','letras/So_Good_to_Feel_Real.html')">So Good to Feel Real</li>
+
+      </ul>
+    </div>
+
+    <!-- Dynamite -->
+    <div class="album">
+      <img src="caratulas/6_Dynamite.jpg" alt="Dynamite">
+      <h2>Dynamite</h2>
+      <p>2005</p>
+      <ul class="tracks">
+<li onclick="openLyrics('Feels Just Like It Should','letras/Feels_Just_Like_It_Should.html')">Feels Just Like It Should</li>
+<li onclick="openLyrics('Dynamite','letras/Dynamite.html')">Dynamite</li>
+<li onclick="openLyrics('Seven Days in Sunny June','letras/Seven_Days_in_Sunny_June.html')">Seven Days in Sunny June</li>
+<li onclick="openLyrics('Electric Mistress','letras/Electric_Mistress.html')">Electric Mistress</li>
+<li onclick="openLyrics('Starchild','letras/Starchild.html')">Starchild</li>
+<li onclick="openLyrics('Love Blind','letras/Love_Blind.html')">Love Blind</li>
+<li onclick="openLyrics('Talullah','letras/Talullah.html')">Talullah</li>
+<li onclick="openLyrics('(Don’t) Give Hate a Chance','letras/Dont_Give_Hate_a_Chance.html')">(Don’t) Give Hate a Chance</li>
+<li onclick="openLyrics('World That He Wants','letras/World_That_He_Wants.html')">World That He Wants</li>
+<li onclick="openLyrics('Black Devil Car','letras/Black_Devil_Car.html')">Black Devil Car</li>
+<li onclick="openLyrics('Hot Tequila Brown','letras/Hot_Tequila_Brown.html')">Hot Tequila Brown</li>
+<li onclick="openLyrics('Time Won’t Wait','letras/Time_Wont_Wait.html')">Time Won’t Wait</li>
+
+	  </ul>
+
+    </div>
+
+    <!-- Rock Dust Light Star -->
+    <div class="album">
+      <img src="caratulas/7_Rock_Dust_Light_Star.jpg" alt="Rock Dust Light Star">
+      <h2>Rock Dust Light Star</h2>
+      <p>2010</p>
+      <ul class="tracks">
+<li onclick="openLyrics('Rock Dust Light Star','letras/Rock_Dust_Light_Star.html')">Rock Dust Light Star</li>
+<li onclick="openLyrics('White Knuckle Ride','letras/White_Knuckle_Ride.html')">White Knuckle Ride</li>
+<li onclick="openLyrics('Smoke and Mirrors','letras/Smoke_and_Mirrors.html')">Smoke and Mirrors</li>
+<li onclick="openLyrics('All Good in the Hood','letras/All_Good_in_the_Hood.html')">All Good in the Hood</li>
+<li onclick="openLyrics('Hey Floyd','letras/Hey_Floyd.html')">Hey Floyd</li>
+<li onclick="openLyrics('She’s a Fast Persuader','letras/Shes_a_Fast_Persuader.html')">She’s a Fast Persuader</li>
+<li onclick="openLyrics('Two Completely Different Things','letras/Two_Completely_Different_Things.html')">Two Completely Different Things</li>
+<li onclick="openLyrics('Goodbye to My Dancer','letras/Goodbye_to_My_Dancer.html')">Goodbye to My Dancer</li>
+<li onclick="openLyrics('Never Gonna Be Another','letras/Never_Gonna_Be_Another.html')">Never Gonna Be Another</li>
+<li onclick="openLyrics('Blue Skies','letras/Blue_Skies.html')">Blue Skies</li>
+<li onclick="openLyrics('Lifeline','letras/Lifeline.html')">Lifeline</li>
+<li onclick="openLyrics('All Good in the Hood (Acoustic Version)','letras/All_Good_in_the_Hood_Acoustic_Version.html')">All Good in the Hood (Acoustic Version)</li>
+<li onclick="openLyrics('Angeline','letras/Angeline.html')">Angeline</li>
+<li onclick="openLyrics('Hang It Over','letras/Hang_It_Over.html')">Hang It Over</li>
+
+      </ul>
+    </div>
+
+    <!-- Automaton -->
+    <div class="album">
+      <img src="caratulas/8_Automaton.jpg" alt="Automaton">
+      <h2>Automaton</h2>
+      <p>2017</p>
+      <ul class="tracks">
+<li onclick="openLyrics('Shake It On','letras/Shake_It_On.html')">Shake It On</li>
+<li onclick="openLyrics('Automaton','letras/Automaton.html')">Automaton</li>
+<li onclick="openLyrics('Cloud 9','letras/Cloud_9.html')">Cloud 9</li>
+<li onclick="openLyrics('Superfresh','letras/Superfresh.html')">Superfresh</li>
+<li onclick="openLyrics('Hot Property','letras/Hot_Property.html')">Hot Property</li>
+<li onclick="openLyrics('Something About You','letras/Something_About_You.html')">Something About You</li>
+<li onclick="openLyrics('Summer Girl','letras/Summer_Girl.html')">Summer Girl</li>
+<li onclick="openLyrics('Nights Out in the Jungle','letras/Nights_Out_in_the_Jungle.html')">Nights Out in the Jungle</li>
+<li onclick="openLyrics('Dr Buzz','letras/Dr_Buzz.html')">Dr Buzz</li>
+<li onclick="openLyrics('We Can Do It','letras/We_Can_Do_It.html')">We Can Do It</li>
+<li onclick="openLyrics('Vitamin','letras/Vitamin.html')">Vitamin</li>
+<li onclick="openLyrics('Carla','letras/Carla.html')">Carla</li>
+
+      </ul>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="lyricsModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeLyrics()">&times;</span>
+      <h2 id="songTitle"></h2>
+      <p id="songLyrics"></p>
+    </div>
+  </div>
+
+  <script>
+    // sincroniza el scroll falso con el real
+    function syncScroll(fake) {
+      const real = document.getElementById('timeline');
+      real.scrollLeft = fake.scrollLeft;
+    }
+
+    // ajusta el ancho del scroll-content al ancho real del timeline
+    function updateScrollWidth() {
+      const real = document.getElementById('timeline');
+      const fakeContent = document.querySelector('.scroll-content');
+      fakeContent.style.width = real.scrollWidth + 'px';
+    }
+
+    window.onload = updateScrollWidth;
+    window.onresize = updateScrollWidth;
+
+    function openLyrics(title, path) {
+    fetch(path)
+    .then(response => response.text())
+    .then(data => {
+      // Crear un DOM temporal
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(data, "text/html");
+      const bodyContent = doc.body.innerHTML.trim(); // solo el contenido del body
+
+      document.getElementById("songTitle").innerText = title;
+      document.getElementById("songLyrics").innerHTML = bodyContent;
+
+      document.getElementById("lyricsModal").classList.add("show");
+    })
+    .catch(error => {
+      document.getElementById("songTitle").innerText = title;
+      document.getElementById("songLyrics").innerHTML = "<p>No se pudo cargar la letra.</p>";
+      document.getElementById("lyricsModal").classList.add("show");
+      console.error("Error cargando letra:", error);
+    });
+   }
+
+	function closeLyrics() {
+	  document.getElementById("lyricsModal").classList.remove("show");
+	}
+  </script>
+</body>
+</html>

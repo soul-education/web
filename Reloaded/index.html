@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Souleducation Timeline</title>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Oswald:wght@700&family=Orbitron:wght@700&family=Monoton&display=swap" rel="stylesheet">
+<style>
+body {
+  background: black;
+  color: white;
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  overflow: hidden;
+
+  /* centrado absoluto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  position: relative;
+  font-size: 3em;
+  perspective: 1000px;
+  text-align: center;
+  line-height: 1.4;
+  /* quitamos margin-top */
+}
+
+
+  .letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(100px) scale(0);
+    animation-fill-mode: forwards;
+  }
+
+  .souleducation {
+    font-family: 'Monoton', cursive;
+    color: #fff;
+    text-shadow: 0 0 20px #ff00aa, 0 0 40px cyan;
+    letter-spacing: 0.1em;
+  }
+
+  .cocreada {
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    text-shadow: 0 0 20px #0ff, 0 0 40px #f0f;
+    letter-spacing: 0.25em;
+    word-spacing: 0.5em;
+  }
+
+  @keyframes enterBack {
+    0% {opacity:0; transform: translateZ(-500px) scale(0);}
+    100% {opacity:1; transform: translateZ(0) scale(1);}
+  }
+  @keyframes flipOut {
+    0% {opacity:1; transform: rotateY(0);}
+    100% {opacity:0; transform: rotateY(180deg);}
+  }
+  @keyframes neonWarpIn {
+    0% {opacity:0; transform: rotateZ(-45deg) scale(0.2);}
+    50% {opacity:1; transform: rotateZ(10deg) scale(1.3);}
+    100% {opacity:1; transform: rotateZ(0) scale(1);}
+  }
+  @keyframes spiralOut {
+    0% {opacity:1; transform: rotate(0deg) scale(1);}
+    100% {opacity:0; transform: rotate(720deg) scale(0);}
+  }
+
+  /* estilos de los discos */
+  .album {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+    max-width: 350px;
+    border: 2px solid #39ff14;
+    padding: 10px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #111, #333);
+    box-shadow: 0 0 30px #39ff14, 0 0 60px #ff00aa;
+    text-align: center;
+  }
+  .album img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 20px cyan, 0 0 40px magenta;
+  }
+  .album h2 {
+    margin: 10px 0 0;
+    font-size: 1.2em;
+    color: #0ff;
+    text-shadow: 0 0 10px #ff00aa, 0 0 20px cyan;
+  }
+  .show { animation: appearFast 0.6s forwards ease-out; }
+  @keyframes appearFast {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.3) rotate(-45deg); }
+    to   { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+  }
+  .hide { animation: fadeOutQuick 0.5s forwards ease-in; }
+  @keyframes fadeOutQuick {
+    from { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+    to   { opacity: 0; transform: translate(-50%, -50%) scale(0.5) rotate(45deg); }
+  }
+  .finalShow { animation: finalPulse 1.5s infinite alternate; }
+  @keyframes finalPulse {
+    from { opacity: 1; transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 20px cyan; }
+    to   { opacity: 1; transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 60px magenta, 0 0 100px yellow; }
+  }
+</style>
+</head>
+<body>
+<div class="container" id="anim"></div>
+
+<div id="timeline">
+  <!-- discos -->
+  <div class="album"><img src="caratulas/1_Emergency_on_Planet_Earth.jpg"><h2>1993 - Emergency on Planet Earth</h2></div>
+  <div class="album"><img src="caratulas/2_The_Return_of_the_Space_Cowboy.jpg"><h2>1994 - The Return of the Space Cowboy</h2></div>
+  <div class="album"><img src="caratulas/3_Travelling_Without_Moving.jpg"><h2>1996 - Travelling Without Moving</h2></div>
+  <div class="album"><img src="caratulas/4_Synkronized.jpg"><h2>1999 - Synkronized</h2></div>
+  <div class="album"><img src="caratulas/5_A_Funk_Odyssey.jpg"><h2>2001 - A Funk Odyssey</h2></div>
+  <div class="album"><img src="caratulas/6_Dynamite.jpg"><h2>2005 - Dynamite</h2></div>
+  <div class="album"><img src="caratulas/7_Rock_Dust_Light_Star.jpg"><h2>2010 - Rock Dust Light Star</h2></div>
+  <div class="album"><img src="caratulas/8_Automaton.jpg"><h2>2017 - Automaton</h2></div>
+</div>
+
+<script>
+const container = document.getElementById('anim');
+const words = [
+  {text:"BIENVENIDOS A\nSOULEDUCATION RELOADED", className:"souleducation", mode:"back", duration: 7000},
+  {text:"UNA EXPERIENCIA\nCOCREADA CON IA", className:"cocreada", mode:"neon", duration: 6000}
+];
+
+function animateWord(wordObj, callback) {
+  container.innerHTML = "";
+  [...wordObj.text].forEach((letter,i)=>{
+    if(letter === "\n"){ 
+      container.appendChild(document.createElement("br"));
+      return;
+    }
+    const span = document.createElement("span");
+    span.className = "letter " + wordObj.className;
+    span.textContent = letter === " " ? "\u00A0" : letter;
+    container.appendChild(span);
+
+    if(wordObj.mode==="back"){
+      span.style.animation = `enterBack 0.6s ease forwards ${i*0.08}s, flipOut 0.5s ease forwards ${1.5 + i*0.15}s`;
+    } else if(wordObj.mode==="neon"){
+      span.style.animation = `neonWarpIn 0.8s ease-out forwards ${i*0.08}s, spiralOut 0.8s ease forwards ${2.5 + i*0.1}s`;
+    }
+  });
+  // cada frase usa su propio tiempo
+  setTimeout(callback, wordObj.duration);
+}
+
+function startTimeline(){
+  container.style.display = "none";
+  const albums = document.querySelectorAll('.album');
+  let i = 0;
+  function showAlbum() {
+    albums[i].classList.add('show');
+    setTimeout(() => {
+      albums[i].classList.add('hide');
+      setTimeout(() => {
+        albums[i].style.display = 'none';
+        i++;
+        if (i < albums.length) {
+          showAlbum();
+        } else {
+          // Espera de 1 segundo antes de mostrar Heels of Steel
+          setTimeout(() => {
+            const final = document.createElement('div');
+            final.className = 'album finalShow';
+            final.innerHTML = `
+              <img src="caratulas/9_NoName.png">
+              <h2>2026 - ¿Heels of Steel?</h2>
+            `;
+            document.getElementById('timeline').appendChild(final);
+            // redirigir después de 6 segundos de latido
+            setTimeout(() => {
+              window.location.href = "index2.html";
+            }, 6000);
+          }, 200); // aquí está el wait de 1 segundo
+        }
+      }, 500); // duración de la salida
+    }, 1000); // tiempo visible de cada disco
+  }
+  showAlbum();
+}
+
+
+// Secuencia: primero BIENVENIDOS..., luego UNA EXPERIENCIA..., luego discos
+animateWord(words[0], () => {
+  animateWord(words[1], () => {
+    startTimeline();
+  });
+});
+</script>
+</body>
+</html>
+

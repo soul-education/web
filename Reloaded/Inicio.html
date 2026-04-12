@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Animación Loop IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Oswald:wght@700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<style>
+  body {
+    background: #2a1b5c; /* nuevo color de fondo */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .container {
+    position: relative;
+    font-size: 3.5em;
+    perspective: 1000px;
+    text-align: center; /* centra las líneas */
+    line-height: 1.4;   /* da aire entre las dos líneas */
+  }
+
+  .letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(100px) scale(0);
+    animation-fill-mode: forwards;
+  }
+
+  .souleducation {
+    font-family: "Permanent Marker", cursive;
+    letter-spacing: 0.05em;
+  }
+
+  .jamiroquai {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.1em;
+    color: red;
+  }
+
+  .cocreada {
+    font-family: 'Orbitron', sans-serif; /* nueva tipografía */
+    color: #fff;
+    text-shadow: 0 0 20px #0ff, 0 0 40px #f0f;
+    letter-spacing: 0.25em; /* más aire entre letras */
+    word-spacing: 0.5em;      /* aire entre palabras */
+  }
+
+  /* Animaciones */
+  @keyframes enterBack {
+    0% {opacity:0; transform: translateZ(-500px) scale(0);}
+    100% {opacity:1; transform: translateZ(0) scale(1);}
+  }
+
+  @keyframes flipOut {
+    0% {opacity:1; transform: rotateY(0);}
+    100% {opacity:0; transform: rotateY(180deg);}
+  }
+
+  @keyframes enterFrontScreen {
+    0% {opacity:0; transform: translateZ(1000px) scale(0.2);}
+    60% {opacity:1; transform: translateZ(200px) scale(1.1);}
+    100% {opacity:1; transform: translateZ(0) scale(1);}
+  }
+
+  @keyframes explode {
+    0% {opacity:1; transform: scale(1);}
+    100% {opacity:0; transform: scale(3) translateY(-200px);}
+  }
+
+  /* Nuevo efecto para IA */
+  @keyframes neonWarpIn {
+    0% {opacity:0; transform: rotateZ(-45deg) scale(0.2);}
+    50% {opacity:1; transform: rotateZ(10deg) scale(1.3);}
+    100% {opacity:1; transform: rotateZ(0) scale(1);}
+  }
+
+  @keyframes spiralOut {
+    0% {opacity:1; transform: rotate(0deg) scale(1);}
+    100% {opacity:0; transform: rotate(720deg) scale(0);}
+  }
+</style>
+</head>
+<body>
+<div class="container" id="anim"></div>
+
+<script>
+const container = document.getElementById('anim');
+const words = [
+  {text:"SOULEDUCATION", className:"souleducation", mode:"back"},
+  {text:"JAMIROQUAI", className:"jamiroquai", mode:"front"},
+  {text:"UNA EXPERIENCIA\nCOCREADA CON IA", className:"cocreada", mode:"neon"}
+];
+let index = 0;
+
+function animateWord(wordObj) {
+  container.innerHTML = "";
+  [...wordObj.text].forEach((letter,i)=>{
+    if(letter === "\n"){ 
+      container.appendChild(document.createElement("br")); // salto de línea
+      return;
+    }
+    const span = document.createElement("span");
+    span.className = "letter " + wordObj.className;
+    span.textContent = letter === " " ? "\u00A0" : letter; // espacio visible
+    container.appendChild(span);
+
+    if(wordObj.mode==="back"){
+      span.style.animation = `enterBack 0.8s ease forwards ${i*0.1}s, flipOut 0.5s ease forwards ${1.5 + i*0.2}s`;
+    } else if(wordObj.mode==="front"){
+      span.style.animation = `enterFrontScreen 1.2s ease-out forwards ${i*0.15}s`;
+    } else if(wordObj.mode==="neon"){
+      span.style.animation = `neonWarpIn 1s ease-out forwards ${i*0.1}s, spiralOut 0.8s ease forwards ${2 + i*0.1}s`;
+    }
+    
+    if(wordObj.mode==="front"){
+    setTimeout(()=>{
+      container.childNodes.forEach((span,i)=>{
+        span.style.animation = `explode 1s ease forwards ${i*0.05}s`;
+      });
+    },3000);
+    }
+    
+  });
+  
+}
+
+
+function loop(){
+  const pos = index % 3; // siempre 0,1,2
+  animateWord(words[index%3]);
+  if (pos == 0) {  
+    setTimeout(loop, 4000);
+  }
+  if (pos == 1) {
+	setTimeout(loop, 5000);  
+  }
+  if (pos == 2) { 
+    setTimeout(loop, 6000);
+  }
+  index++;
+}
+
+loop();
+</script>
+</body>
+</html>
