@@ -178,12 +178,9 @@ svg.buffalo:hover { filter:brightness(0.92); }
 /* Responsive mobile */
 @media (max-width:768px) {
   .hamburger { display:block; }
-  .menu { display:flex; flex-direction:column; } /* siempre visible */
-  .nav-container { padding:0 1em; }
+  .menu { display:none; flex-direction:column; } /* empieza plegado */
+  .menu.open { display:flex; } /* se muestra al abrir */
 
-  nav .dropdown a { border-bottom:1px solid #444; }
-
-  /* Submenús fijos en mobile */
   .dropdown-content {
     position:static;
     transform:none;
@@ -192,6 +189,7 @@ svg.buffalo:hover { filter:brightness(0.92); }
     border-radius:0;
     display:block; /* siempre desplegados */
   }
+}
 
   header {
     background:linear-gradient(to bottom, #2a1b5c, #000);
