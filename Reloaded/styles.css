@@ -189,7 +189,6 @@ svg.buffalo:hover { filter:brightness(0.92); }
     border-radius:0;
     display:block; /* siempre desplegados */
   }
-}
 
   header {
     background:linear-gradient(to bottom, #2a1b5c, #000);
