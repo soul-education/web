@@ -156,38 +156,52 @@ function animateWord(wordObj, callback) {
   setTimeout(callback, wordObj.duration);
 }
 
-function startTimeline(){
+function startTimeline() {
   container.style.display = "none";
   const albums = document.querySelectorAll('.album');
   let i = 0;
+
   function showAlbum() {
-    albums[i].classList.add('show');
+    const current = albums[i];
+    current.classList.add('show');
+
+    // Espera visible de 1 segundo
     setTimeout(() => {
-      albums[i].classList.add('hide');
-      setTimeout(() => {
-        albums[i].style.display = 'none';
+      current.classList.add('hide');
+
+      // Escucha el final de la transición/animación
+      current.addEventListener('transitionend', handleEnd);
+      current.addEventListener('animationend', handleEnd);
+
+      function handleEnd() {
+        // Limpia listeners para no duplicar
+        current.removeEventListener('transitionend', handleEnd);
+        current.removeEventListener('animationend', handleEnd);
+
+        current.style.display = 'none';
         i++;
+
         if (i < albums.length) {
           showAlbum();
         } else {
-          // Espera de 1 segundo antes de mostrar Heels of Steel
+          // Aquí recién se dispara el final, cuando terminó la animación del último álbum
+          const final = document.createElement('div');
+          final.className = 'album finalShow';
+          final.innerHTML = `
+            <img src="caratulas/9_NoName.png">
+            <h2>2026 - ¿Heels of Steel?</h2>
+          `;
+          document.getElementById('timeline').appendChild(final);
+
+          // Redirigir después de 6 segundos
           setTimeout(() => {
-            const final = document.createElement('div');
-            final.className = 'album finalShow';
-            final.innerHTML = `
-              <img src="caratulas/9_NoName.png">
-              <h2>2026 - ¿Heels of Steel?</h2>
-            `;
-            document.getElementById('timeline').appendChild(final);
-            // redirigir después de 6 segundos de latido
-            setTimeout(() => {
-              window.location.href = "index2.html";
-            }, 6000);
-          }, 200); // aquí está el wait de 1 segundo
+            window.location.href = "index2.html";
+          }, 6000);
         }
-      }, 500); // duración de la salida
+      }
     }, 1000); // tiempo visible de cada disco
   }
+
   showAlbum();
 }
 

@@ -6,7 +6,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Oswald:wght@700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
 <style>
   body {
-    background: #2a1b5c; /* nuevo color de fondo */
+    background: #2a1b5c;
     color: white;
     display: flex;
     justify-content: center;
@@ -19,8 +19,8 @@
     position: relative;
     font-size: 3.5em;
     perspective: 1000px;
-    text-align: center; /* centra las líneas */
-    line-height: 1.4;   /* da aire entre las dos líneas */
+    text-align: center;
+    line-height: 1.4;
   }
 
   .letter {
@@ -33,20 +33,27 @@
   .souleducation {
     font-family: "Permanent Marker", cursive;
     letter-spacing: 0.05em;
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #f0f, 0 0 40px #0ff;
   }
 
   .jamiroquai {
     font-family: 'Oswald', sans-serif;
     letter-spacing: 0.1em;
-    color: red;
+    color: #ff0040;
+    text-shadow: 0 0 10px #ff0040, 0 0 20px #ff0080, 0 0 40px #ff0040;
   }
 
   .cocreada {
-    font-family: 'Orbitron', sans-serif; /* nueva tipografía */
-    color: #fff;
-    text-shadow: 0 0 20px #0ff, 0 0 40px #f0f;
-    letter-spacing: 0.25em; /* más aire entre letras */
-    word-spacing: 0.5em;      /* aire entre palabras */
+    font-family: 'Orbitron', sans-serif;
+    color: #aaff00; /* verde lima */
+    text-shadow: 
+      0 0 10px #aaff00,
+      0 0 20px #00ff80,
+      0 0 40px #00ff00,
+      0 0 80px #ffffff;
+    letter-spacing: 0.25em;
+    word-spacing: 0.5em;
   }
 
   /* Animaciones */
@@ -62,25 +69,32 @@
 
   @keyframes enterFrontScreen {
     0% {opacity:0; transform: translateZ(1000px) scale(0.2);}
-    60% {opacity:1; transform: translateZ(200px) scale(1.1);}
+    60% {opacity:1; transform: translateZ(200px) scale(1.3);}
     100% {opacity:1; transform: translateZ(0) scale(1);}
   }
 
-  @keyframes explode {
-    0% {opacity:1; transform: scale(1);}
-    100% {opacity:0; transform: scale(3) translateY(-200px);}
+  @keyframes zoomIn {
+    0% {opacity:0; transform: scale(0.5);}
+    100% {opacity:1; transform: scale(1.3);}
   }
 
-  /* Nuevo efecto para IA */
+  @keyframes explodeOut {
+    0% {opacity:1; transform: scale(1.3) translate(0,0);}
+    100% {opacity:0; transform: scale(3) translate(var(--x), var(--y));}
+  }
+
   @keyframes neonWarpIn {
     0% {opacity:0; transform: rotateZ(-45deg) scale(0.2);}
     50% {opacity:1; transform: rotateZ(10deg) scale(1.3);}
     100% {opacity:1; transform: rotateZ(0) scale(1);}
   }
 
-  @keyframes spiralOut {
-    0% {opacity:1; transform: rotate(0deg) scale(1);}
-    100% {opacity:0; transform: rotate(720deg) scale(0);}
+  @keyframes pulseFade {
+    0% {opacity:1; text-shadow: 0 0 20px #aaff00, 0 0 40px #00ff80;}
+    25% {opacity:1; text-shadow: 0 0 40px #ffffff, 0 0 80px #aaff00;}
+    50% {opacity:1; text-shadow: 0 0 20px #00ff00, 0 0 40px #ffffff;}
+    75% {opacity:1; text-shadow: 0 0 60px #ffffff, 0 0 100px #00ff80;}
+    100% {opacity:0; transform: scale(1.2);}
   }
 </style>
 </head>
@@ -100,43 +114,44 @@ function animateWord(wordObj) {
   container.innerHTML = "";
   [...wordObj.text].forEach((letter,i)=>{
     if(letter === "\n"){ 
-      container.appendChild(document.createElement("br")); // salto de línea
+      container.appendChild(document.createElement("br"));
       return;
     }
     const span = document.createElement("span");
     span.className = "letter " + wordObj.className;
-    span.textContent = letter === " " ? "\u00A0" : letter; // espacio visible
+    span.textContent = letter === " " ? "\u00A0" : letter;
     container.appendChild(span);
 
     if(wordObj.mode==="back"){
-      span.style.animation = `enterBack 0.8s ease forwards ${i*0.1}s, flipOut 0.5s ease forwards ${1.5 + i*0.2}s`;
+      span.style.animation = `enterBack 0.8s ease forwards ${i*0.1}s, flipOut 0.8s ease forwards ${2 + i*0.15}s`;
     } else if(wordObj.mode==="front"){
-      span.style.animation = `enterFrontScreen 1.2s ease-out forwards ${i*0.15}s`;
+      span.style.animation = `zoomIn 1s ease-out forwards ${i*0.1}s`;
     } else if(wordObj.mode==="neon"){
-      span.style.animation = `neonWarpIn 1s ease-out forwards ${i*0.1}s, spiralOut 0.8s ease forwards ${2 + i*0.1}s`;
+      span.style.animation = `neonWarpIn 1s ease-out forwards ${i*0.1}s, pulseFade 1.5s ease forwards ${2 + i*0.1}s`;
     }
-    
-    if(wordObj.mode==="front"){
+  });
+
+  if(wordObj.mode==="front"){
     setTimeout(()=>{
       container.childNodes.forEach((span,i)=>{
-        span.style.animation = `explode 1s ease forwards ${i*0.05}s`;
+        const x = (Math.random()*400 - 200) + "px";
+        const y = (Math.random()*400 - 200) + "px";
+        span.style.setProperty('--x', x);
+        span.style.setProperty('--y', y);
+        span.style.animation = `explodeOut 1s ease forwards ${i*0.05}s`;
       });
-    },3000);
-    }
-    
-  });
-  
+    },2500); // después de que se acerque
+  }
 }
 
-
 function loop(){
-  const pos = index % 3; // siempre 0,1,2
-  animateWord(words[index%3]);
+  const pos = index % 3;
+  animateWord(words[pos]);
   if (pos == 0) {  
     setTimeout(loop, 4000);
   }
   if (pos == 1) {
-	setTimeout(loop, 5000);  
+    setTimeout(loop, 4000);  
   }
   if (pos == 2) { 
     setTimeout(loop, 6000);
