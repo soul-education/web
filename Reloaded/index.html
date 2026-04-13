@@ -15,6 +15,7 @@ body {
 
   /* centrado absoluto */
   display: flex;
+  flex-direction: column; /* apila elementos uno debajo del otro */
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -111,6 +112,36 @@ body {
     from { opacity: 1; transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 20px cyan; }
     to   { opacity: 1; transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 60px magenta, 0 0 100px yellow; }
   }
+  
+#skip {
+  position: absolute;
+  bottom: 30px;   /* distancia desde el borde inferior */
+  width: 100%;
+  text-align: center;
+}
+
+#skip a {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5em;
+  color: #ff0040; /* rojo intenso */
+  text-decoration: none;
+  text-shadow: 
+    0 0 10px #ff0040,
+    0 0 20px #ff0040,
+    0 0 40px #ff0040,
+    0 0 80px #ff0040;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+#skip a:hover {
+  transform: scale(1.1);
+  text-shadow: 
+    0 0 20px #ff0040,
+    0 0 40px #ff0040,
+    0 0 80px #ff0040,
+    0 0 120px #ff0040;
+}  
+  
 /* Solo mobile */
 @media (max-width: 768px) {
   .container {
@@ -137,11 +168,18 @@ body {
     font-size: 1em; /* subtítulo más pequeño */
   }
 }  
+
+
   
 </style>
 </head>
 <body>
 <div class="container" id="anim"></div>
+
+<div id="skip">
+  <a href="index2.html">SALTEAR ANIMACIÓN</a>
+</div>
+
 
 <div id="timeline">
   <!-- discos -->
