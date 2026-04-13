@@ -123,10 +123,14 @@
       e.preventDefault();
       const pagina = this.getAttribute("data-pagina");
       cargarPagina(pagina);
+
+      // 🔽 Cierra el menú hamburguesa al elegir opción
+      const menu = document.querySelector(".menu");
+      menu.classList.remove("open");
     });
   });
 
-    // Toggle hamburguesa
+  // Toggle hamburguesa
   const hamburger = document.querySelector(".hamburger");
   const menu = document.querySelector(".menu");
   hamburger.addEventListener("click", () => {
@@ -143,6 +147,7 @@
     });
   });
 </script>
+
 
 </body>
 </html>
