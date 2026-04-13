@@ -6,38 +6,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto&display=swap" rel="stylesheet">
 <title>Wallpapers Jamiroquai</title>
 <style>
-  body {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* centra horizontalmente */
-  justify-content: flex-start;
+body {
   margin: 0;
-  padding: 0 80px;
-  font-family: 'Roboto', Verdana, Geneva, sans-serif;
+  text-align: center;            
+  font-family: 'Roboto', Verdana, Geneva, sans-serif; 
   color: #fff;
+  overflow-x: hidden;
   background-color: #2a1b5c;
   line-height: 1.6;
   font-size: 1.1em;
-  max-width: auto;
-  margin: auto;
-  }	
- 
+}
+
 /* Subtítulos con efecto neón */
 h2, h3 {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 900; 
-    font-size: 2em;   
-    color: #ff00aa;   
-    -webkit-text-stroke: 2px #2a1b5c; 
-    text-shadow: 
-        0 0 10px #ff00aa,
-        0 0 20px #ff00aa,
-        0 0 40px #ff00aa;
-    margin-top: 40px;
-    text-transform: uppercase; 
-    letter-spacing: 2px;       
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900; 
+  font-size: 2em;   
+  color: #ff00aa;   
+  -webkit-text-stroke: 2px #2a1b5c; 
+  text-shadow: 
+      0 0 10px #ff00aa,
+      0 0 20px #ff00aa,
+      0 0 40px #ff00aa;
+  margin-top: 40px;
+  text-transform: uppercase; 
+  letter-spacing: 2px;       
 }
-	
+
 h1.fondos-title {
   font-family: 'Orbitron', sans-serif;
   font-size: 4em;
@@ -49,7 +44,7 @@ h1.fondos-title {
   background-size: 800% 800%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text; /* estándar */
+  background-clip: text;
   color: transparent;
 
   animation: gradientFlow 10s ease infinite, neonPulse 2s infinite alternate;
@@ -74,58 +69,72 @@ h1.fondos-title {
   }
 }  
 
-  
-  table {
-    border-collapse: collapse;
-    margin-left: auto;
-    margin-right: auto;
-    width: auto; /* evita que se estire raro */
-  }
-  td {
-    padding: 15px;
-  }
-  a img {
-    max-width: 200px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px #ff00aa;
-    transition: transform 0.2s;
-  }
-  a img:hover {
-    transform: scale(1.05);
-  }
-  
-/* Solo mobile */
+table {
+  border-collapse: collapse;
+}
+td {
+  padding: 15px;
+}
+a img {
+  max-width: 200px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #ff00aa;
+  transition: transform 0.2s;
+}
+a img:hover {
+  transform: scale(1.05);
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   body {
-    padding: 15px; /* menos padding lateral */
-    font-size: 1em; /* texto más equilibrado */
+    padding: 15px;
+    font-size: 1em;
   }
 
   h1.fondos-title {
-    font-size: 2.2em; /* título más razonable en mobile */
+    font-size: 2.2em;
     letter-spacing: 2px;
   }
 
   h2, h3 {
-    font-size: 1.4em; /* subtítulos más pequeños */
+    font-size: 1.4em;
     letter-spacing: 1px;
   }
 
-table, tr, td {
-    display: block;       /* cada celda ocupa toda la fila */
+  table, tr, td {
+    display: block;
     text-align: center;
   }
 
   a img {
-    max-width: 100%;      /* que la imagen se adapte al ancho */
+    max-width: 100%;
   }
 
   td {
-    width: 50%;           /* dos columnas por fila */
-    float: left;          /* que se alineen lado a lado */
+    width: 50%;
+    float: left;
     padding: 8px;
   }
-}  
+}
+
+/* Desktop */
+@media (min-width: 1080px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  table {
+    margin: 0 auto;
+    width: auto;
+  }
+}
+
   
 </style>
 </head>
