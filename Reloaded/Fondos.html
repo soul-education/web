@@ -108,12 +108,19 @@ h1.fondos-title {
     letter-spacing: 1px;
   }
 
+table, tr, td {
+    display: block;       /* cada celda ocupa toda la fila */
+    text-align: center;
+  }
+
   a img {
-    max-width: 120px; /* imagen más chica en mobile */
+    max-width: 100%;      /* que la imagen se adapte al ancho */
   }
 
   td {
-    padding: 8px; /* menos padding en celdas */
+    width: 50%;           /* dos columnas por fila */
+    float: left;          /* que se alineen lado a lado */
+    padding: 8px;
   }
 }  
   
