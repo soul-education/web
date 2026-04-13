@@ -178,23 +178,19 @@ svg.buffalo:hover { filter:brightness(0.92); }
 /* Responsive mobile */
 @media (max-width:768px) {
   .hamburger { display:block; }
-  .menu { display:none; }
-  .menu.open { display:flex; flex-direction:column; }
+  .menu { display:flex; flex-direction:column; } /* siempre visible */
   .nav-container { padding:0 1em; }
 
   nav .dropdown a { border-bottom:1px solid #444; }
 
-  /* Submenús expandibles en mobile */
+  /* Submenús fijos en mobile */
   .dropdown-content {
     position:static;
     transform:none;
     background:none;
     padding:0;
     border-radius:0;
-    display:none;
-  }
-  .dropdown.open .dropdown-content {
-    display:block;
+    display:block; /* siempre desplegados */
   }
 
   header {
@@ -207,7 +203,7 @@ svg.buffalo:hover { filter:brightness(0.92); }
     text-align:center;
     padding:0;
   }
-  .buffalo-group { display:none; } /* oculta buffalos en mobile */
+  .buffalo-group { display:none; }
   #souleducation { font-size:2em; padding:0.5em; }
 
   .iframe-overlay {
@@ -219,3 +215,4 @@ svg.buffalo:hover { filter:brightness(0.92); }
     height:70vh;
   }
 }
+

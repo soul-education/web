@@ -97,6 +97,35 @@
     75% {opacity:1; text-shadow: 0 0 60px #ffffff, 0 0 100px #00ff80;}
     100% {opacity:0; transform: scale(1.2);}
   }
+/* Solo mobile */
+@media (max-width: 768px) {
+  body {
+    height: auto; /* evita que se corte en pantallas pequeñas */
+    padding: 20px;
+    overflow-y: auto; /* permite scroll si el contenido excede */
+    flex-direction: column; /* mejor distribución en mobile */
+  }
+
+  .container {
+    font-size: 1.8em; /* texto más equilibrado en mobile */
+    line-height: 1.2;
+  }
+
+  .souleducation {
+    letter-spacing: 0.02em; /* menos separación */
+  }
+
+  .jamiroquai {
+    letter-spacing: 0.05em;
+  }
+
+  .cocreada {
+    letter-spacing: 0.15em;
+    word-spacing: 0.3em;
+  }
+}
+  
+  
 </style>
 </head>
 <body>

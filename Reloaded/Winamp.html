@@ -87,6 +87,33 @@ h1.skins-title {
   .skins a img:hover {
     transform: scale(1.05);
   }
+/* Solo mobile */
+@media (max-width: 768px) {
+  body {
+    padding: 15px; /* menos padding lateral */
+    font-size: 1em; /* texto más equilibrado */
+  }
+
+  h1.skins-title {
+    font-size: 2.2em; /* título más razonable en mobile */
+    letter-spacing: 2px;
+  }
+
+  h2, h3 {
+    font-size: 1.4em; /* subtítulos más pequeños */
+    letter-spacing: 1px;
+  }
+
+  .skins {
+    gap: 10px; /* menos espacio entre imágenes */
+  }
+
+  .skins a img {
+    max-width: 120px; /* imágenes más chicas en mobile */
+  }
+}
+  
+  
 </style>
 </head>
 <body>

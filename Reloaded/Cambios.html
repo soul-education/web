@@ -72,6 +72,30 @@ h1.lapagina-title {
     text-shadow: 0 0 20px #00ffe0, 0 0 40px #00ffe0, 0 0 80px #00ffe0;
     transform: scale(1.05);
   }
+}
+
+/* Solo mobile */
+@media (max-width: 768px) {
+  body {
+    padding: 15px; /* menos padding lateral en mobile */
+    font-size: 1em; /* texto más equilibrado */
+  }
+
+  h1.lapagina-title {
+    font-size: 2.2em; /* título más razonable en mobile */
+    letter-spacing: 2px;
+  }
+
+  h2, h3 {
+    font-size: 1.4em; /* subtítulos más pequeños */
+    letter-spacing: 1px;
+  }
+
+  pre {
+    font-size: 12px; /* reduce tamaño del bloque de historial */
+    line-height: 1.3;
+    overflow-x: auto; /* permite scroll si se desborda */
+  }
 }  
 </style>
 </head>

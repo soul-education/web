@@ -211,6 +211,36 @@
     text-shadow: 0 0 20px #00ffe0, 0 0 40px #00ffe0, 0 0 80px #00ffe0;
     transform: scale(1.05);
   }
+}
+@media (max-width: 768px) {
+  h1.discografia-title {
+    font-size: 2.2em; /* título más razonable en mobile */
+    letter-spacing: 2px;
+  }
+
+  .timeline {
+    gap: 20px; /* menos espacio entre álbumes */
+    padding: 20px; /* menos padding lateral */
+    overflow-x: auto; /* permite scroll horizontal en mobile */
+  }
+
+  .album {
+    width: 180px; /* reduce ancho de cada álbum */
+    padding: 10px;
+  }
+
+  .album h2 {
+    font-size: 1em; /* subtítulo más pequeño */
+  }
+
+  .album p {
+    font-size: 0.8em; /* texto más compacto */
+  }
+
+  .modal-content {
+    width: 95%; /* modal más ancho en mobile */
+    font-size: 0.9em; /* texto más equilibrado */
+  }
 }  
 </style>
 
