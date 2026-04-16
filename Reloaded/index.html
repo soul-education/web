@@ -22,7 +22,7 @@ body {
 }
 
 .container {
-  position: relative;
+  position: absolute;
   font-size: 3em;
   perspective: 1000px;
   text-align: center;
@@ -72,30 +72,59 @@ body {
   }
 
   /* estilos de los discos */
+#timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+  grid-gap: 20px; /* separación entre discos */
+  justify-items: center;
+  align-items: start;
+  margin-top: 40px;
+}
+
+.album.finalShow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  max-width: 180px;   /* tamaño controlado */
+  opacity: 1;
+  animation: finalPulse 1.5s infinite alternate;
+  text-align: center;
+}
+  
   .album {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.8);
+    position: relative;
     opacity: 0;
-    max-width: 350px;
+    transform: scale(0.8);
+    transition: all 0.6s ease;
+    max-width: 150px;
     border: 2px solid #39ff14;
     padding: 10px;
     border-radius: 10px;
     background: linear-gradient(135deg, #111, #333);
     box-shadow: 0 0 30px #39ff14, 0 0 60px #ff00aa;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 220px; 
+    
+    
   }
   .album img {
     max-width: 100%;
     border-radius: 8px;
     box-shadow: 0 0 20px cyan, 0 0 40px magenta;
+    height: auto;
+    flex-shrink: 0;
   }
   .album h2 {
-    margin: 10px 0 0;
-    font-size: 1.2em;
+    margin-top: 8px;
+    font-size: 0.9em;
     color: #0ff;
     text-shadow: 0 0 10px #ff00aa, 0 0 20px cyan;
+    text-align: center;
+    word-wrap: break-word;
   }
   .show { animation: appearFast 0.6s forwards ease-out; }
   @keyframes appearFast {
@@ -141,6 +170,9 @@ body {
     0 0 80px #ff0040,
     0 0 120px #ff0040;
 }  
+
+
+
   
 /* Solo mobile */
 @media (max-width: 768px) {
@@ -194,6 +226,7 @@ body {
 </div>
 
 <script>
+	
 const container = document.getElementById('anim');
 const words = [
   {text:"BIENVENIDOS A\nSOULEDUCATION RELOADED", className:"souleducation", mode:"back", duration: 7000},
@@ -221,54 +254,38 @@ function animateWord(wordObj, callback) {
   // cada frase usa su propio tiempo
   setTimeout(callback, wordObj.duration);
 }
-
+	
 function startTimeline() {
   container.style.display = "none";
   const albums = document.querySelectorAll('.album');
-  let i = 0;
 
-  function showAlbum() {
-    const current = albums[i];
-    current.classList.add('show');
+  // Mostrar todos juntos
+  albums.forEach(album => {
+    album.classList.add('show');
+  });
 
-    // Espera visible de 1 segundo
+  // Mantener visibles un tiempo corto
+  setTimeout(() => {
+    albums.forEach(album => {
+      album.classList.add('hide');
+    });
+
+    // Después de desaparecer, mostrar el final
     setTimeout(() => {
-      current.classList.add('hide');
+      const final = document.createElement('div');
+      final.className = 'album finalShow';
+      final.innerHTML = `
+        <img src="caratulas/9_NoName.png">
+        <h2>2026 - ¿Heels of Steel?</h2>
+      `;
+      // se agrega dentro del mismo grid
+      document.body.appendChild(final);
 
-      // Escucha el final de la transición/animación
-      current.addEventListener('transitionend', handleEnd);
-      current.addEventListener('animationend', handleEnd);
-
-      function handleEnd() {
-        // Limpia listeners para no duplicar
-        current.removeEventListener('transitionend', handleEnd);
-        current.removeEventListener('animationend', handleEnd);
-
-        current.style.display = 'none';
-        i++;
-
-        if (i < albums.length) {
-          showAlbum();
-        } else {
-          // Aquí recién se dispara el final, cuando terminó la animación del último álbum
-          const final = document.createElement('div');
-          final.className = 'album finalShow';
-          final.innerHTML = `
-            <img src="caratulas/9_NoName.png">
-            <h2>2026 - ¿Heels of Steel?</h2>
-          `;
-          document.getElementById('timeline').appendChild(final);
-
-          // Redirigir después de 6 segundos
-          setTimeout(() => {
-            window.location.href = "index2.html";
-          }, 6000);
-        }
-      }
-    }, 1000); // tiempo visible de cada disco
-  }
-
-  showAlbum();
+      setTimeout(() => {
+        window.location.href = "index2.html";
+      }, 4000);
+    }, 600);
+  }, 1500);
 }
 
 
@@ -279,6 +296,6 @@ animateWord(words[0], () => {
   });
 });
 </script>
+
 </body>
 </html>
-
