@@ -136,41 +136,60 @@ const container = document.getElementById('anim');
 const words = [
   {text:"SOULEDUCATION", className:"souleducation", mode:"back"},
   {text:"JAMIROQUAI", className:"jamiroquai", mode:"front"},
-  {text:"UNA EXPERIENCIA\nCOCREADA CON IA", className:"cocreada", mode:"neon"}
+  {text:"UNA EXPERIENCIA\nCOCREADA CON IA", className:"cocreada", mode:"neonBlock"}
 ];
 let index = 0;
 
 function animateWord(wordObj) {
   container.innerHTML = "";
-  [...wordObj.text].forEach((letter,i)=>{
-    if(letter === "\n"){ 
-      container.appendChild(document.createElement("br"));
-      return;
-    }
-    const span = document.createElement("span");
-    span.className = "letter " + wordObj.className;
-    span.textContent = letter === " " ? "\u00A0" : letter;
-    container.appendChild(span);
 
-    if(wordObj.mode==="back"){
-      span.style.animation = `enterBack 0.8s ease forwards ${i*0.1}s, flipOut 0.8s ease forwards ${2 + i*0.15}s`;
-    } else if(wordObj.mode==="front"){
-      span.style.animation = `zoomIn 1s ease-out forwards ${i*0.1}s`;
-    } else if(wordObj.mode==="neon"){
-      span.style.animation = `neonWarpIn 1s ease-out forwards ${i*0.1}s, pulseFade 1.5s ease forwards ${2 + i*0.1}s`;
-    }
-  });
+  if(wordObj.mode === "neonBlock"){
+    // Animar la frase completa como bloques de palabras
+    const lines = wordObj.text.split("\n");
+    lines.forEach((line) => {
+      const lineDiv = document.createElement("div");
+      lineDiv.style.display = "block";
+      line.split(" ").forEach((word, i) => {
+        const span = document.createElement("span");
+        span.className = wordObj.className;
+        span.textContent = word;
+        lineDiv.appendChild(span);
+        lineDiv.appendChild(document.createTextNode(" "));
 
-  if(wordObj.mode==="front"){
-    setTimeout(()=>{
-      container.childNodes.forEach((span,i)=>{
-        const x = (Math.random()*400 - 200) + "px";
-        const y = (Math.random()*400 - 200) + "px";
-        span.style.setProperty('--x', x);
-        span.style.setProperty('--y', y);
-        span.style.animation = `explodeOut 1s ease forwards ${i*0.05}s`;
+        span.style.animation = `neonWarpIn 1s ease-out forwards ${i*0.2}s, pulseFade 1.5s ease forwards ${2 + i*0.2}s`;
       });
-    },2500); // después de que se acerque
+      container.appendChild(lineDiv);
+    });
+  } else {
+    // Mantener animación original por letras
+    [...wordObj.text].forEach((letter,i)=>{
+      if(letter === "\n"){ 
+        container.appendChild(document.createElement("br"));
+        return;
+      }
+      const span = document.createElement("span");
+      span.className = "letter " + wordObj.className;
+      span.textContent = letter === " " ? "\u00A0" : letter;
+      container.appendChild(span);
+
+      if(wordObj.mode==="back"){
+        span.style.animation = `enterBack 0.8s ease forwards ${i*0.1}s, flipOut 0.8s ease forwards ${2 + i*0.15}s`;
+      } else if(wordObj.mode==="front"){
+        span.style.animation = `zoomIn 1s ease-out forwards ${i*0.1}s`;
+      }
+    });
+
+    if(wordObj.mode==="front"){
+      setTimeout(()=>{
+        container.childNodes.forEach((span,i)=>{
+          const x = (Math.random()*400 - 200) + "px";
+          const y = (Math.random()*400 - 200) + "px";
+          span.style.setProperty('--x', x);
+          span.style.setProperty('--y', y);
+          span.style.animation = `explodeOut 1s ease-in-out forwards ${i*0.05}s`;
+        });
+      },2500);
+    }
   }
 }
 
