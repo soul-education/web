@@ -216,7 +216,6 @@ svg.buffalo:hover { filter:brightness(0.92); }
     text-shadow:none;
     text-align:center;
     padding-left:70px;   /* espacio mínimo a la izquierda */
-    padding-right:70px;  /* opcional, para balancear */
   }
 
   /* Hamburguesa estilizada a la izquierda */
